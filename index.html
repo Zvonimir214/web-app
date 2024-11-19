@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikacija za unos podataka</title>
+</head>
+<body>
+    <h1>Unos podataka</h1>
+    <form id="dataForm">
+        <label for="datum">Datum:</label>
+        <input type="date" id="datum" name="datum"><br><br>
+        
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="Potvrđeno">Potvrđeno</option>
+            <option value="Ne potvrđeno">Ne potvrđeno</option>
+        </select><br><br>
+        
+        <label for="vrsta">Vrsta:</label>
+        <select id="vrsta" name="vrsta">
+            <option value="Suho">Suho</option>
+            <option value="Razglas">Razglas</option>
+        </select><br><br>
+        
+        <label for="vrijeme">Vrijeme:</label>
+        <input type="time" id="vrijeme" name="vrijeme"><br><br>
+        
+        <label for="dogovara">Dogovara:</label>
+        <select id="dogovara" name="dogovara">
+            <option value="Zvone">Zvone</option>
+            <option value="Matteo">Matteo</option>
+            <option value="Luka">Luka</option>
+            <option value="Dario">Dario</option>
+            <option value="Marin">Marin</option>
+            <option value="Andrej">Andrej</option>
+        </select><br><br>
+        
+        <label for="iznos">Iznos:</label>
+        <input type="number" id="iznos" name="iznos"><br><br>
+        
+        <label for="napomena">Napomena:</label>
+        <textarea id="napomena" name="napomena"></textarea><br><br>
+        
+        <button type="button" onclick="submitForm()">Upiši</button>
+    </form>
+
+    <script>
+        async function submitForm() {
+            const formData = new FormData(document.getElementById('dataForm'));
+            const response = await fetch('/submit', {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            });
+            const result = await response.text();
+            alert(result);
+        }
+    </script>
+</body>
+</html>
